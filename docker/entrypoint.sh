@@ -34,5 +34,20 @@ if [ -s "${CONFIG_FILE}" ]; then
     chmod 0444 "${CONFIG_FILE}"
 fi
 
+# Keep mod_php on exactly one Apache MPM before Apache starts.
+for module in mpm_event mpm_worker; do
+    if [ -e "/etc/apache2/mods-enabled/${module}.load" ]; then
+        a2dismod "$module" || true
+    fi
+done
+a2enmod mpm_prefork
+printf "Apache MPM modules enabled:"
+for module_file in /etc/apache2/mods-enabled/mpm_*.load; do
+    if [ -e "$module_file" ]; then
+        printf " %s" "${module_file##*/}"
+    fi
+done
+printf "\n"
+
 exec "$@"
 
