@@ -6,7 +6,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git libfreetype6-dev libicu-dev libjpeg62-turbo-dev libonig-dev libpng-dev libxml2-dev libzip-dev unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" dom gd gettext intl mbstring mysqli opcache pdo_mysql simplexml xml xmlreader xmlwriter zip \
+    && docker-php-ext-install dom \
+    && docker-php-ext-install -j"$(nproc)" gd gettext intl mbstring mysqli opcache pdo_mysql simplexml xml xmlreader xmlwriter zip \
     && a2enmod headers rewrite \
     && rm -rf /var/lib/apt/lists/*
 
@@ -27,3 +28,4 @@ WORKDIR /var/www/html
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/osticket-entrypoint"]
 CMD ["apache2-foreground"]
+
