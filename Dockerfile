@@ -9,7 +9,9 @@ RUN apt-get update \
     && docker-php-ext-install dom \
     && CFLAGS="-I/usr/src/php" docker-php-ext-install -j"$(nproc)" xmlreader \
     && docker-php-ext-install -j"$(nproc)" gd gettext intl mbstring mysqli opcache pdo_mysql simplexml xml xmlwriter zip \
-    && a2enmod headers rewrite \
+    && (a2dismod mpm_event || true) \
+    && (a2dismod mpm_worker || true) \
+    && a2enmod mpm_prefork headers rewrite \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth 1 --branch "${OSTICKET_REF}" https://github.com/osTicket/osTicket.git /tmp/osticket \
