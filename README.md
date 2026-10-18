@@ -3,7 +3,7 @@
 A GitHub-ready osTicket lab for practicing IT support triage and user access request handling. It builds the open-source osTicket application from its official source, runs it with MariaDB, and includes exercises for realistic help-desk workflows.
 
 - **GitHub repository:** https://github.com/Ghaster890/it-ticketing-system-lab
-- **Live website:** Not deployed yet. This project needs Docker hosting, a private database service, and persistent volumes. See [the Railway deployment guide](docs/DEPLOY-RAILWAY.md) for the deployment steps; add the generated HTTPS URL here after deployment.
+- **Live website:** [https://osticket-web-production.up.railway.app](https://osticket-web-production.up.railway.app). The hosted site currently opens osTicket's one-time installer; follow [the Railway setup guide](docs/DEPLOY-RAILWAY.md) before using the ticket system.
 
 ## What you will practice
 
@@ -91,7 +91,7 @@ The second command deletes the lab's saved state. Back up anything you need befo
 - Commit the Dockerfile, Compose file, scripts, docs, and this README.
 - Keep .env untracked; never commit generated credentials.
 - Add screenshots of fictional test tickets only after reviewing them for secrets and personal data.
-- Update the README with your own deployment URL after deploying the instance.
+- If you create another deployment, replace the live website URL above with that deployment's address.
 
 ## Resume wording
 
