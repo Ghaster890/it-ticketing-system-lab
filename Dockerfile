@@ -7,7 +7,8 @@ RUN apt-get update \
         git libfreetype6-dev libicu-dev libjpeg62-turbo-dev libonig-dev libpng-dev libxml2-dev libzip-dev unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install dom \
-    && docker-php-ext-install -j"$(nproc)" gd gettext intl mbstring mysqli opcache pdo_mysql simplexml xml xmlreader xmlwriter zip \
+    && CFLAGS="-I/usr/src/php" docker-php-ext-install -j"$(nproc)" xmlreader \
+    && docker-php-ext-install -j"$(nproc)" gd gettext intl mbstring mysqli opcache pdo_mysql simplexml xml xmlwriter zip \
     && a2enmod headers rewrite \
     && rm -rf /var/lib/apt/lists/*
 
