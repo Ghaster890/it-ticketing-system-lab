@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+
+backups/
+data/
+*.sql
+*.sql.gz
+*.tar
+*.tar.gz
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

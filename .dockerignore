@@ -1,0 +1,11 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+backups
+data
+docs
+scripts
+*.sql
+*.sql.gz
