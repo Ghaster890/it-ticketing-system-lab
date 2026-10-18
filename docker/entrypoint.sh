@@ -3,8 +3,18 @@ set -eu
 
 CONFIG_DIR="/var/lib/osticket-config"
 CONFIG_FILE="${CONFIG_DIR}/ost-config.php"
+RAILWAY_ATTACHMENTS_DIR="${CONFIG_DIR}/attachments"
 
 mkdir -p "${CONFIG_DIR}"
+if [ -n "${RAILWAY_ENVIRONMENT_ID:-}" ]; then
+    mkdir -p "${RAILWAY_ATTACHMENTS_DIR}"
+    if [ ! -L /var/www/html/attachments ]; then
+        rm -rf /var/www/html/attachments
+        ln -s "${RAILWAY_ATTACHMENTS_DIR}" /var/www/html/attachments
+    fi
+fi
+mkdir -p /var/www/html/attachments
+
 if [ ! -e "${CONFIG_FILE}" ]; then
     : > "${CONFIG_FILE}"
 fi
@@ -25,3 +35,4 @@ if [ -s "${CONFIG_FILE}" ]; then
 fi
 
 exec "$@"
+
